@@ -1,0 +1,43 @@
+CREATE TABLE autor (
+    id BIGINT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    sexo VARCHAR(50),
+    ano_nascimento INTEGER NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE
+);
+
+CREATE TABLE livro (
+    id BIGINT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    isbn VARCHAR(50) NOT NULL UNIQUE,
+    data_publicacao DATE NOT NULL
+);
+
+CREATE TABLE livro_autor (
+    livro_id BIGINT REFERENCES livro(id),
+    autor_id BIGINT REFERENCES autor(id),
+    PRIMARY KEY (livro_id, autor_id)
+);
+
+CREATE TABLE locatario (
+    id BIGINT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    sexo VARCHAR(50),
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    data_nascimento DATE NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE
+);
+
+CREATE TABLE aluguel (
+    id BIGINT PRIMARY KEY,
+    locatario_id BIGINT NOT NULL REFERENCES locatario(id),
+    data_retirada TIMESTAMP NOT NULL,
+    data_devolucao TIMESTAMP NOT NULL
+);
+
+CREATE TABLE aluguel_livros (
+    aluguel_id BIGINT REFERENCES aluguel(id),
+    livro_id BIGINT REFERENCES livro(id),
+    PRIMARY KEY (aluguel_id, livro_id)
+);
