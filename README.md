@@ -170,7 +170,7 @@ Exemplo de payload para POST /locatarios:
   "sexo": "Feminino",
   "telefone": "11988887777",
   "email": "ana@email.com",
-  "dataNascimento": 1996,
+  "dataNascimento": "12-04-1996",
   "cpf": "12345678901"
 }
 ```

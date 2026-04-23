@@ -2,6 +2,8 @@ package alexguimaraes.gerenciadorbiblioteca.dto.request;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +32,7 @@ public record LocatarioRequestDTO(
 
         @NotNull(message = "Data de nascimento e obrigatoria")
         @Past(message = "Data de nascimento invalida")
+        @JsonFormat(pattern = "dd-MM-yyyy")
         LocalDate dataNascimento,
 
         @NotBlank(message = "CPF e obrigatorio")
