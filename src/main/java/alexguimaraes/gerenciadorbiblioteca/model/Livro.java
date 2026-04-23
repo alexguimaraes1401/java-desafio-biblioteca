@@ -1,5 +1,6 @@
 package alexguimaraes.gerenciadorbiblioteca.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -32,6 +33,9 @@ public class Livro {
     @Column(nullable = false, unique = true)
     private String isbn;
 
+    @Column(name = "data_publicacao", nullable = false)
+    private LocalDate dataPublicacao;
+
     @ManyToMany
     @JoinTable(
             name = "livro_autor",
@@ -40,14 +44,15 @@ public class Livro {
     )
     private List<Autor> autores;
 
-    public Livro(String nome, String isbn, List<Autor> autores) {
-        this(null, nome, isbn, autores);
+    public Livro(String nome, String isbn, LocalDate dataPublicacao, List<Autor> autores) {
+        this(null, nome, isbn, dataPublicacao, autores);
     }
 
-    public Livro(Long id, String nome, String isbn, List<Autor> autores) {
+    public Livro(Long id, String nome, String isbn, LocalDate dataPublicacao, List<Autor> autores) {
         this.id = id;
         this.nome = nome;
         this.isbn = isbn;
+        this.dataPublicacao = dataPublicacao;
         this.autores = autores;
     }
 }

@@ -16,6 +16,7 @@ public class LivroMapper {
         return new Livro(
                 requestDTO.nome(),
                 requestDTO.isbn(),
+                requestDTO.dataPublicacao(),
                 autores
         );
     }
@@ -25,6 +26,7 @@ public class LivroMapper {
                 id,
                 requestDTO.nome(),
                 requestDTO.isbn(),
+                requestDTO.dataPublicacao(),
                 autores
         );
     }
@@ -38,6 +40,7 @@ public class LivroMapper {
                 livro.getId(),
                 livro.getNome(),
                 livro.getIsbn(),
+            livro.getDataPublicacao(),
                 autoresIds
         );
     }

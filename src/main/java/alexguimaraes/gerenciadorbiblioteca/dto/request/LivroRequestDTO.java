@@ -1,8 +1,11 @@
 package alexguimaraes.gerenciadorbiblioteca.dto.request;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -17,6 +20,10 @@ public record LivroRequestDTO(
                 message = "ISBN invalido"
         )
         String isbn,
+
+        @NotNull(message = "Data de publicacao e obrigatoria")
+        @PastOrPresent(message = "Data de publicacao invalida")
+        LocalDate dataPublicacao,
 
         List<Long> autoresIds
 ) {}
