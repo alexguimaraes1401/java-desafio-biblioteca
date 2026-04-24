@@ -19,6 +19,11 @@ public class LivroService {
         return livroRepository.findAll();
     }
 
+    public Livro buscarPorId(Long id) {
+        return livroRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Livro nao encontrado"));
+    }
+
     public Livro salvar(Livro livro) {
         return livroRepository.save(livro);
     }

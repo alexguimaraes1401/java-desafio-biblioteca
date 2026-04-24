@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/locatarios")
-@Tag(name = "LocatÃ¡rios", description = "Endpoints para gerenciar locatÃ¡rios")
+@Tag(name = "Locatarios", description = "Endpoints para gerenciar locatarios")
 @Validated
 public class LocatarioController {
 
@@ -40,9 +40,9 @@ public class LocatarioController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar todos os locatÃ¡rios", description = "Retorna uma lista de todos os locatÃ¡rios cadastrados")
+    @Operation(summary = "Listar todos os locatarios", description = "Retorna uma lista de todos os locatarios cadastrados")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Lista de locatÃ¡rios retornada com sucesso"),
+        @ApiResponse(responseCode = "200", description = "Lista de locatarios retornada com sucesso"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<List<LocatarioResponseDTO>> listarLocatarios() {
@@ -54,10 +54,10 @@ public class LocatarioController {
     }
 
     @PostMapping
-    @Operation(summary = "Adicionar um novo locatÃ¡rio", description = "Cria um novo registro de locatÃ¡rio")
+    @Operation(summary = "Adicionar um novo locatario", description = "Cria um novo registro de locatario")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "LocatÃ¡rio criado com sucesso"),
-        @ApiResponse(responseCode = "400", description = "Dados invÃ¡lidos"),
+        @ApiResponse(responseCode = "201", description = "Locatario criado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Dados invalidos"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<LocatarioResponseDTO> adicionarLocatario(@Valid @RequestBody LocatarioRequestDTO locatarioRequestDTO) {
@@ -67,11 +67,11 @@ public class LocatarioController {
     }
     
     @PutMapping("/{id}")
-    @Operation(summary = "Atualizar um locatÃ¡rio", description = "Atualiza os dados de um locatÃ¡rio existente")
+    @Operation(summary = "Atualizar um locatario", description = "Atualiza os dados de um locatario existente")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "LocatÃ¡rio atualizado com sucesso"),
-        @ApiResponse(responseCode = "404", description = "LocatÃ¡rio nÃ£o encontrado"),
-        @ApiResponse(responseCode = "400", description = "Dados invÃ¡lidos"),
+        @ApiResponse(responseCode = "200", description = "Locatario atualizado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Locatario nao encontrado"),
+        @ApiResponse(responseCode = "400", description = "Dados invalidos"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<LocatarioResponseDTO> atualizarLocatario(@Valid @RequestBody LocatarioRequestDTO locatarioRequestDTO, @PathVariable Long id) {
@@ -81,10 +81,10 @@ public class LocatarioController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Deletar um locatÃ¡rio", description = "Remove um locatÃ¡rio do sistema")
+    @Operation(summary = "Deletar um locatario", description = "Remove um locatario do sistema")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "204", description = "LocatÃ¡rio deletado com sucesso"),
-        @ApiResponse(responseCode = "404", description = "LocatÃ¡rio nÃ£o encontrado"),
+        @ApiResponse(responseCode = "204", description = "Locatario deletado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Locatario nao encontrado"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<Void> deletarLocatario(@PathVariable Long id) {

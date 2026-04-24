@@ -58,11 +58,22 @@ public class LivroController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "Buscar livro por ID", description = "Retorna um livro pelo ID informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Livro encontrado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Livro nao encontrado")
+    })
+    public ResponseEntity<LivroResponseDTO> buscarLivroPorId(@PathVariable Long id) {
+        Livro livro = livroService.buscarPorId(id);
+        return ResponseEntity.ok(livroMapper.toResponseDTO(livro));
+    }
+
     @PostMapping
     @Operation(summary = "Adicionar um novo livro", description = "Cria um novo registro de livro")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Livro criado com sucesso"),
-        @ApiResponse(responseCode = "400", description = "Dados invÃ¡lidos"),
+        @ApiResponse(responseCode = "400", description = "Dados invalidos"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<LivroResponseDTO> adicionarLivro(@Valid @RequestBody LivroRequestDTO livroRequestDTO) {
@@ -75,8 +86,8 @@ public class LivroController {
     @Operation(summary = "Atualizar um livro", description = "Atualiza os dados de um livro existente")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Livro atualizado com sucesso"),
-        @ApiResponse(responseCode = "404", description = "Livro nÃ£o encontrado"),
-        @ApiResponse(responseCode = "400", description = "Dados invÃ¡lidos"),
+        @ApiResponse(responseCode = "404", description = "Livro nao encontrado"),
+        @ApiResponse(responseCode = "400", description = "Dados invalidos"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<LivroResponseDTO> atualizarLivro(@Valid @RequestBody LivroRequestDTO livroRequestDTO, @PathVariable Long id) {
@@ -89,7 +100,7 @@ public class LivroController {
     @Operation(summary = "Deletar um livro", description = "Remove um livro do sistema")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Livro deletado com sucesso"),
-        @ApiResponse(responseCode = "404", description = "Livro nÃ£o encontrado"),
+        @ApiResponse(responseCode = "404", description = "Livro nao encontrado"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<Void> deletarLivro(@PathVariable Long id) {
