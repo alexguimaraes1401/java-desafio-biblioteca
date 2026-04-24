@@ -123,6 +123,7 @@ Base URLs:
 ### Autores
 
 - GET /autores
+- GET /autores/buscar?nome={nome}
 - POST /autores
 - PUT /autores/{id}
 - DELETE /autores/{id}
@@ -141,6 +142,10 @@ Exemplo de payload para POST /autores:
 ### Livros
 
 - GET /livros
+- GET /livros/{id}
+- GET /livros/disponiveis
+- GET /livros/alugados
+- GET /livros/por-autor?nomeAutor={nome}
 - POST /livros
 - PUT /livros/{id}
 - DELETE /livros/{id}
@@ -151,9 +156,15 @@ Exemplo de payload para POST /livros:
 {
   "nome": "Clean Code",
   "isbn": "9780132350884",
+  "dataPublicacao": "2008-08-11",
   "autoresIds": [1]
 }
 ```
+
+Observacoes de regra de negocio:
+
+- Um livro deve ter ao menos 1 autor.
+- Um livro so pode ser excluido se nunca foi alugado.
 
 ### Locatários
 
@@ -195,6 +206,10 @@ Exemplo de payload para POST /alugueis:
 
 Observação: se `dataRetirada` e `dataDevolucao` não forem enviadas, o sistema preenche automaticamente.
 
+Regra de negocio de locatario:
+
+- Um locatario so pode ser excluido se nao houver pendencia de devolucao.
+
 ## Validações e padrão de resposta de erro
 
 - Validações de entrada são aplicadas com Bean Validation nos DTOs de request.
@@ -228,14 +243,3 @@ A carga inicial de dados roda automaticamente via Flyway em:
 
 - src/main/resources/db/migration/V1_0_0_002__inserir_dados_iniciais.sql
 
-## Troubleshooting de compilação
-
-- Garanta que os arquivos `.java` estejam em UTF-8 sem BOM.
-- O código-fonte ativo da aplicação está no pacote `alexguimaraes.gerenciadorbiblioteca`.
-
-## Status atual (resumo)
-
-- Estrutura em camadas aplicada: controller, service, repository, model, dto, mapper e exception handler global.
-- Endpoints principais de autores, livros, locatarios e alugueis implementados.
-- Projeto compilando com sucesso.
-- Testes automatizados ainda em evolução (próxima etapa do desafio).
