@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
@@ -25,6 +26,7 @@ public record LivroRequestDTO(
         @PastOrPresent(message = "Data de publicacao invalida")
         LocalDate dataPublicacao,
 
+        @NotEmpty(message = "Livro deve ter ao menos 1 autor")
         List<Long> autoresIds
 ) {}
 

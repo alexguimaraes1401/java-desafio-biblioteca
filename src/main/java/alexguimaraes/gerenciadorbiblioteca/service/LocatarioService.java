@@ -1,12 +1,15 @@
 package alexguimaraes.gerenciadorbiblioteca.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import alexguimaraes.gerenciadorbiblioteca.exception.BusinessRuleException;
 import alexguimaraes.gerenciadorbiblioteca.exception.ResourceNotFoundException;
 import alexguimaraes.gerenciadorbiblioteca.model.Locatario;
+import alexguimaraes.gerenciadorbiblioteca.repository.AluguelRepository;
 import alexguimaraes.gerenciadorbiblioteca.repository.LocatarioRepository;
 
 @Service
@@ -14,6 +17,9 @@ public class LocatarioService {
     
     @Autowired
     private LocatarioRepository locatarioRepository; 
+
+    @Autowired
+    private AluguelRepository aluguelRepository;
 
     public List<Locatario> listarLocatarios() {
         return locatarioRepository.findAll();
@@ -33,6 +39,11 @@ public class LocatarioService {
     public void deleteLocatario(Long id) {
         Locatario locatario = locatarioRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Locatario nao encontrado"));
+
+        if (aluguelRepository.existePendenciaAtivaParaLocatario(id, LocalDateTime.now())) {
+            throw new BusinessRuleException("Nao e permitido excluir locatario com pendencia de devolucao");
+        }
+
         locatarioRepository.delete(locatario);
     }
 }

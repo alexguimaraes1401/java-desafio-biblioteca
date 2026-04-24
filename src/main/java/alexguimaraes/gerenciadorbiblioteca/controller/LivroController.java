@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import alexguimaraes.gerenciadorbiblioteca.dto.request.LivroRequestDTO;
@@ -67,6 +68,36 @@ public class LivroController {
     public ResponseEntity<LivroResponseDTO> buscarLivroPorId(@PathVariable Long id) {
         Livro livro = livroService.buscarPorId(id);
         return ResponseEntity.ok(livroMapper.toResponseDTO(livro));
+    }
+
+    @GetMapping("/disponiveis")
+    @Operation(summary = "Listar livros disponiveis", description = "Retorna livros que nao estao em aluguel ativo")
+    public ResponseEntity<List<LivroResponseDTO>> listarLivrosDisponiveis() {
+        List<LivroResponseDTO> response = livroService.listarLivrosDisponiveis()
+                .stream()
+                .map(livroMapper::toResponseDTO)
+                .toList();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/alugados")
+    @Operation(summary = "Listar livros alugados", description = "Retorna livros atualmente em aluguel ativo")
+    public ResponseEntity<List<LivroResponseDTO>> listarLivrosAlugados() {
+        List<LivroResponseDTO> response = livroService.listarLivrosAlugados()
+                .stream()
+                .map(livroMapper::toResponseDTO)
+                .toList();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/por-autor")
+    @Operation(summary = "Listar livros por autor pesquisado", description = "Retorna livros de autores filtrados por nome")
+    public ResponseEntity<List<LivroResponseDTO>> listarLivrosPorAutor(@RequestParam String nomeAutor) {
+        List<LivroResponseDTO> response = livroService.listarLivrosPorAutorPesquisado(nomeAutor)
+                .stream()
+                .map(livroMapper::toResponseDTO)
+                .toList();
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
