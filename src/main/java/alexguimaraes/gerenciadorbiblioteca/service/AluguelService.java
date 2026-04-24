@@ -1,5 +1,6 @@
 package alexguimaraes.gerenciadorbiblioteca.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class AluguelService {
     }
 
     public List<Aluguel> listarAlugueisAtivos() {
-        return aluguelRepository.findByDataDevolucaoIsNull();
+        return aluguelRepository.findAtivosEm(LocalDateTime.now());
     }
 
     public List<Aluguel> listarAlugueisPorLocatario(Long locatarioId) {

@@ -67,7 +67,7 @@ public class AluguelController {
     }
 
     @GetMapping("/ativos")
-    @Operation(summary = "Listar alugueis ativos", description = "Retorna alugueis sem data de devolucao")
+    @Operation(summary = "Listar alugueis ativos", description = "Retorna alugueis com dataRetirada <= agora e dataDevolucao >= agora")
     public ResponseEntity<List<AluguelResponseDTO>> listarAlugueisAtivos() {
         List<AluguelResponseDTO> response = aluguelService.listarAlugueisAtivos()
                 .stream()
