@@ -12,13 +12,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  adminer:
-    image: adminer
-    container_name: library-adminer
-    restart: always
-    ports:
-      - "8081:8080"
-
   app:
     build: .
     container_name: library-api

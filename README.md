@@ -29,7 +29,6 @@ docker compose up --build
 Serviços esperados:
 
 - API: http://localhost:8080
-- Adminer: http://localhost:8081
 - PostgreSQL: localhost:5432
 
 Credenciais do banco (padrão):
