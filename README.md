@@ -273,15 +273,9 @@ A carga inicial de dados roda automaticamente via Flyway em:
 docker compose up -d --build
 ```
 
-3. Rodar unitarios:
+3. Rodar testes unitarios:
 
 ```bash
 .\mvnw.cmd test
-```
-
-4. Rodar E2E:
-
-```bash
-powershell -NoProfile -ExecutionPolicy Bypass -File .\e2e_check.ps1
 ```
 

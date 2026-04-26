@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
 
 @OpenAPIDefinition(
     info = @Info(
-        title = "Library Manager API",
+        title = "Gerenciador Biblioteca API",
         version = "1.0.0",
         description = "API para gerenciamento de uma biblioteca com controle de autores, livros e locatarios"
     )
