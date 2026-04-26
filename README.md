@@ -69,7 +69,6 @@ Linux/macOS:
 ```bash
 ./mvnw test
 ```
-
 ## Build
 
 Compilar (sem gerar jar):
@@ -103,7 +102,7 @@ Linux/macOS:
 Executar jar:
 
 ```bash
-java -jar target/libraryManager-0.0.1-SNAPSHOT.jar
+java -jar target/GerenciadorBiblioteca-0.0.1-SNAPSHOT.jar
 ```
 
 ## Documentação da API
@@ -237,9 +236,53 @@ As tabelas são criadas via Flyway em:
 
 - src/main/resources/db/migration/V1_0_0_001__criar_estrutura_inicial.sql
 
+E tambem sao aplicadas migrations incrementais:
+
+- src/main/resources/db/migration/V1_0_0_002__inserir_dados_iniciais.sql
+- src/main/resources/db/migration/V1_0_0_003__sincronizar_sequences_pos_seed.sql
+
+### Regra importante do Flyway
+
+- Migrations versionadas ja aplicadas **nao devem ser editadas**.
+- Qualquer ajuste deve ser feito em uma nova migration (ex.: `V1_0_0_004__...sql`).
+- Se editar migration antiga com banco persistido, a API pode falhar ao subir com erro de checksum.
+
+Quando quiser resetar tudo em ambiente local (incluindo volume do Postgres):
+
+```bash
+docker compose down -v
+docker compose up -d --build
+```
+
 ## Dados de exemplo
 
 A carga inicial de dados roda automaticamente via Flyway em:
 
 - src/main/resources/db/migration/V1_0_0_002__inserir_dados_iniciais.sql
+
+## Fluxo recomendado de validacao local
+
+1. Compilar:
+
+```bash
+.\mvnw.cmd clean compile
+```
+
+2. Subir stack:
+
+```bash
+docker compose up -d --build
+```
+
+3. Rodar unitarios:
+
+```bash
+.\mvnw.cmd test
+```
+
+4. Rodar E2E:
+
+```bash
+powershell -NoProfile -ExecutionPolicy Bypass -File .\e2e_check.ps1
+```
 

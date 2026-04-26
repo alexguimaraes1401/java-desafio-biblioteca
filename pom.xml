@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>alexGuimaraes</groupId>
-	<artifactId>libraryManager</artifactId>
+	<artifactId>GerenciadorBiblioteca</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>libraryManager</name>
+	<name>GerenciadorBiblioteca</name>
 	<description>Gerenciador de livros da uma biblioteca</description>
 	<properties>
 		<java.version>17</java.version>

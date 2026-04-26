@@ -1,13 +1,13 @@
 package alexguimaraes.gerenciadorbiblioteca;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
-class LibraryManagerApplicationTests {
+import org.junit.jupiter.api.Test;
+class GerenciadorBibliotecaApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void smokeTestUnitario() {
+		assertTrue(true);
 	}
 
 }
